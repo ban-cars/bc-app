@@ -8,15 +8,16 @@ import {
 
 import Map from './pages/Map/Map';
 import SignInSide from './pages/SignIn/SignInSide';
+import getAvailableParking from "./api/getAvailableParking";
 
 class App extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      name: "",
-      licensePlate: "V6M 4M2"
+      parkingSpots: getAvailableParking,
     };
+
 
   };
 
@@ -25,7 +26,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={SignInSide} />
-          <Route exact path="/map" component={Map} />
+          <Route exact path="/map" component={<Map parking={this.state.parkingSpots}/>} />
           <Route exact path="/confirmation"/>
         </Switch>
       </BrowserRouter>
