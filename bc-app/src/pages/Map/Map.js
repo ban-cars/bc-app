@@ -91,7 +91,7 @@ const Map = async () => {
   let parkingSpots = [];
   let allSpots = getAvailableParking();
 
-  allSpots.map((spot) => {
+  allSpots.parkings.forEach((spot) => {
     parkingSpots.push({
       location: [spot.lat, spot.lon],
       addHandler: "mouseover",
