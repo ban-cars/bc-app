@@ -2,6 +2,8 @@ import React from "react";
 
 import { ReactBingmaps } from "react-bingmaps";
 
+import { getAvailableParking } from '../../api/getAvailableParking';
+
 import { makeStyles, fade } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -64,14 +66,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Map = () => {
+const Map = async () => {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
     bottom: false
   });
-
-  const spots = this.props.parkingSpots;
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -87,6 +87,25 @@ const Map = () => {
   const toggleDrawerMap = () => {
     setState({ ...state, bottom: true });
   };
+
+  let parkingSpots = [];
+  let allSpots = getAvailableParking();
+
+  allSpots.map((spot) => {
+    parkingSpots.push({
+      location: [spot.lat, spot.lon],
+      addHandler: "mouseover",
+      infoboxOption: {
+        title: spot.address,
+        description: spot.address
+      },
+      pushPinOption: {
+        title: spot.address,
+        description: spot.address
+      },
+      infoboxAddHandler: { type: "click", callback: toggleDrawerMap }
+    });
+  });
 
   const fullList = side => (
     <div
@@ -155,21 +174,7 @@ const Map = () => {
             center={[49.246292, -123.0433]}
             mapTypeId={"road"}
             navigationBarMode={"compact"}
-            infoboxesWithPushPins={[
-              {
-                location: [49.246292, -123.0433],
-                addHandler: "mouseover",
-                infoboxOption: {
-                  title: "Infobox Title",
-                  description: "Infobox"
-                },
-                pushPinOption: {
-                  title: "Pushpin Title",
-                  description: "Pushpin"
-                },
-                infoboxAddHandler: { type: "click", callback: toggleDrawerMap }
-              }
-            ]}
+            infoboxesWithPushPins={parkingSpots}
           />
         </>
       </main>
