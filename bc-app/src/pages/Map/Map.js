@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Map = async () => {
+const Map = () => {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
