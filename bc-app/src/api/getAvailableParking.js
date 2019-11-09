@@ -6,7 +6,7 @@ export const getAvailableParking = async () => {
         parkingSpots = await fetch("https://localhost:8080/api/getDetails", {
             method: 'get'
         });
-        return parkingSpots;
+        return parkingSpots.parkings;
     } catch (e) {
         console.log(e);
     }
