@@ -71,6 +71,8 @@ const Map = () => {
     bottom: false
   });
 
+  const spots = this.props.parkingSpots;
+
   const toggleDrawer = (side, open) => event => {
     if (
       event.type === "keydown" &&

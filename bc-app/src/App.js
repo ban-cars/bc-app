@@ -18,16 +18,19 @@ class App extends React.Component {
       parkingSpots:[],
     };
 
+    this.getParking = async () => {
+      return await getAvailableParking();
+    }
 
   };
 
   render(){
-    this.setState({parkingSpots: getAvailableParking})
+    this.getParking();
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={SignInSide} />
-          <Route exact path="/map" component={<Map parking={this.state.parkingSpots}/>} />
+          <Route exact path="/map" component={<Map parkingSpots={this.getParking()}/>} />
           <Route exact path="/confirmation"/>
         </Switch>
       </BrowserRouter>
