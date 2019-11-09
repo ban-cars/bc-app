@@ -13,8 +13,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { withRouter } from 'react-router'
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -105,6 +103,7 @@ const SignInSide = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              href={"http://localhost:3000/map"}
             >
               Sign In
             </Button>
@@ -130,4 +129,4 @@ const SignInSide = () => {
   );
 }
 
-export default withRouter(SignInSide);
+export default SignInSide;

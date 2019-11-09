@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ReactBingmaps } from 'react-bingmaps';
 
 const Map = () => {
