@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const bookingSteps = ["Shipping address", "Payment details", "Review your order"];
+const yourDetails = ["Your Contact Details"];
 
 const ReserveParking = () => {
   const classes = useStyles();
@@ -67,107 +68,97 @@ const ReserveParking = () => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Confirm Your Details
+            Your Contact Details that We Currently Hold
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map(label => (
+            {yourDetails.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
           <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="fname"
-            value="Nicholas"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="lname"
-            value="Chin"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="licensePlate"
-            name="licensePlate"
-            label="License plate"
-            fullWidth
-            autoComplete="licensePlate"
-            value="123 ABC"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="driverLicense"
-            name="driverLicense"
-            label="Driver's License"
-            fullWidth
-            autoComplete="driverLicense"
-            value="12345ASDFG"
-          />
-        </Grid>
-      </Grid>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
-          </React.Fragment>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="firstName"
+                name="firstName"
+                label="First name"
+                fullWidth
+                autoComplete="fname"
+                value="Nicholas"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="lastName"
+                name="lastName"
+                label="Last name"
+                fullWidth
+                autoComplete="lname"
+                value="Chin"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="licensePlate"
+                name="licensePlate"
+                label="License plate"
+                fullWidth
+                autoComplete="licensePlate"
+                value="123 ABC"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="driverLicense"
+                name="driverLicense"
+                label="Driver's License"
+                fullWidth
+                autoComplete="driverLicense"
+                value="12345ASDFG"
+              />
+            </Grid>
+          </Grid>
         </Paper>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            Confirm Your Booking
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map(label => (
+            {bookingSteps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="timeStart"
+                name="timeStart"
+                label="Booking From: "
+                fullWidth
+                autoComplete="timeStart"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="timeEnd"
+                name="timeEnd"
+                label="Booking Until"
+                fullWidth
+                autoComplete="timeEnd"
+              />
+            </Grid>
+          </Grid>
           <React.Fragment>
-            {activeStep === steps.length ? (
+            {activeStep === bookingSteps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
                   Thank you for your order.
@@ -179,24 +170,24 @@ const ReserveParking = () => {
                 </Typography>
               </React.Fragment>
             ) : (
-              <React.Fragment>
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
+                <React.Fragment>
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <Button onClick={handleBack} className={classes.button}>
+                        Back
                     </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === bookingSteps.length - 1 ? "Place order" : "Next"}
+                    </Button>
+                  </div>
+                </React.Fragment>
+              )}
           </React.Fragment>
         </Paper>
       </main>
