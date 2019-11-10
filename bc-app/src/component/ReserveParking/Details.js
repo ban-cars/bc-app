@@ -13,7 +13,7 @@ const EnterDetails = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1" gutterBottom>
-            Address: 1551 Charland Ave Coquitlam, BC V3K 3L6
+            Address: 3349 Archimedes St, Vancouver, BC V5R 4W4
           </Typography>
         </Grid>
         <Grid item xs={12}>
