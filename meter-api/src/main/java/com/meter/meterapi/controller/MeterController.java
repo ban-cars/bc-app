@@ -32,10 +32,12 @@ public class MeterController {
 	public ResponseEntity<MapResponseSchema> getDetails() {
 		// Inject fake data
 		mapRepository.deleteAll();
-		mapRepository.save(new Parking(49.2606, -123.2460, "http://qualityone.ca/docs/content_images/pressure/west-vancouver-driveway-power-washed-after.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false, 4));
-		mapRepository.save(new Parking(18.2606, -122.2460, "https://www.joyvictor.com/i/2016/01/Beautiful-driveway-landscaping-with-paver-flooring-also-beutiful-front-yard-garden-plus-white-garage-door.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false, 5));
-		mapRepository.save(new Parking(28.2606, -121.2460, "https://mrengineering.ca/wp-content/uploads/2019/05/Concrete-Garage-Pad.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false,3));
-
+		mapRepository.save(new Parking(49.230940,-123.133890, "http://qualityone.ca/docs/content_images/pressure/west-vancouver-driveway-power-washed-after.jpg", "6051 Selkirk St", "0900", "1700", System.nanoTime(), false, 125));
+		mapRepository.save(new Parking(49.230110,-123.132990, "https://www.joyvictor.com/i/2016/01/Beautiful-driveway-landscaping-with-paver-flooring-also-beutiful-front-yard-garden-plus-white-garage-door.jpg", "1170 W 45th Ave", "1430", "1900", System.nanoTime(), false, 135));
+		mapRepository.save(new Parking(49.230940,-123.133890, "https://mrengineering.ca/wp-content/uploads/2019/05/Concrete-Garage-Pad.jpg", "Oakridge, Vancouver", "1250", "2050", System.nanoTime(), false, 100));
+		mapRepository.save(new Parking(49.263372, -123.042044, "https://www.fayettevilleflyer.com/wp-content/uploads/2019/10/driveway-ft.jpg", "East Vancouver", "1210", "2000", System.nanoTime(), false, 105));
+		mapRepository.save(new Parking(49.223140,-123.129870, "https://mrengineering.ca/wp-content/uploads/2019/05/Concrete-Garage-Pad.jpg", "1063 W 53rd Ave", "1200", "2000", System.nanoTime(), false, 105));
+		
 		List<Parking> temp = new ArrayList<Parking>();
 		for(Parking parking: mapRepository.findAll()) {
 			temp.add(parking);
