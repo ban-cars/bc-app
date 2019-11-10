@@ -89,25 +89,24 @@ const Map = () => {
   };
 
   let parkingSpots = [];
-  let allSpots = getAvailableParking();
-console.log("allSpots:" + allSpots.toString())
-console.log("allSpots.parking:" + allSpots.parkings)
-
-  allSpots.forEach((spot) => {
-    parkingSpots.push({
-      location: [spot.lat, spot.lon],
-      addHandler: "mouseover",
-      infoboxOption: {
-        title: spot.address,
-        description: spot.address
-      },
-      pushPinOption: {
-        title: spot.address,
-        description: spot.address
-      },
-      infoboxAddHandler: { type: "click", callback: toggleDrawerMap }
+  let allSpots = getAvailableParking().then((spots) => {
+    spots.parkings.forEach((spot) => {
+      parkingSpots.push({
+        location: [spot.lat, spot.lon],
+        addHandler: "mouseover",
+        infoboxOption: {
+          title: spot.address,
+          description: spot.address
+        },
+        pushPinOption: {
+          title: spot.address,
+          description: spot.address
+        },
+        infoboxAddHandler: { type: "click", callback: toggleDrawerMap }
+      });
     });
   });
+
 
   const fullList = side => (
     <div
