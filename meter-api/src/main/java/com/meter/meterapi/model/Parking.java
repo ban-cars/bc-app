@@ -99,10 +99,10 @@ public class Parking {
 	}
 	
 	@JsonProperty("suggestedPrice")
-	public Integer suggestedPrice;
+	public String suggestedPrice;
 	
 	public Parking(double lat, double lon, String url, String address, String timeStart, String timeEnd, Long todayDate,
-			boolean isReserved, int suggestedPrice) {
+			boolean isReserved, String suggestedPrice) {
 		super();
 		this.lat = lat;
 		this.lon = lon; 

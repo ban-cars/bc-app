@@ -93,7 +93,7 @@ const Map = () => {
 
   let allSpots = getAvailableParking().then((spots) => {
     spots.parkings.forEach((spot) => {
-      let suggestedPrice = spot.suggestedPrice.toString()
+      let suggestedPrice = spot.suggestedPrice
       let finalPrice = suggestedPrice.substring(0,1) + "." + suggestedPrice.substring(1,suggestedPrice.length)
       parkingSpots.push({
         location: [spot.lat, spot.lon],
