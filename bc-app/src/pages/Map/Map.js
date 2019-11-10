@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     width: "auto"
   }
 }));
-
+let parkingSpots = [];
 const Map = () => {
   const classes = useStyles();
 
@@ -90,7 +90,6 @@ const Map = () => {
     setState({ ...state, bottom: true });
   };
 
-  let parkingSpots = [];
   let allSpots = getAvailableParking().then((spots) => {
     spots.parkings.forEach((spot) => {
       parkingSpots.push({
