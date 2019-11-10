@@ -97,7 +97,7 @@ const Map = () => {
         addHandler: "mouseover",
         infoboxOption: {
           title: spot.address,
-          description: spot.address
+          description: `Address: ${spot.address} \n Suggested Price: ${spot.suggestedPrice} \n Availability: ${spot.timeStart} - ${spot.timeEnd}`
         },
         pushPinOption: {
           title: spot.address,
@@ -107,7 +107,6 @@ const Map = () => {
       });
     });
   });
-
 
   const fullList = side => (
     <div
@@ -167,6 +166,7 @@ const Map = () => {
             center={[49.246292, -123.0433]}
             mapTypeId={"road"}
             navigationBarMode={"compact"}
+            zoom={13}
             infoboxesWithPushPins={parkingSpots}
           />
         </>
