@@ -1,20 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 
 import Details from "./Details";
 import EnterDetails from "./EnterDetails";
 import Billing from "./Billing";
-
-import difference from "lodash/difference";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -63,24 +62,18 @@ function getStepContent(step) {
       return <EnterDetails />;
     case 2:
       return <Billing />;
+    case 3:
+      return <p1>s</p1>;
     default:
       throw new Error("Unknown step");
   }
 }
 
-const ReserveParking = ({ currSpot, data }) => {
+const App = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    let a;
-    if (activeStep === steps.length - 1) {
-      a = data.parkingSpots.filter(spot => {
-        return spot.locaion == currSpot;
-      });
-      data.userSpot = difference(data.parkingSpots, a);
-      data.parkingSpots = a;
-    }
     setActiveStep(activeStep + 1);
   };
 
@@ -93,7 +86,7 @@ const ReserveParking = ({ currSpot, data }) => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Register for spot
+            Register for spot #257
           </Typography>
           <Typography component="h3" variant="h4" align="center">
             November 10, 2019
@@ -142,4 +135,4 @@ const ReserveParking = ({ currSpot, data }) => {
   );
 };
 
-export default ReserveParking;
+export default App;

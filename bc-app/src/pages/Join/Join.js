@@ -96,6 +96,7 @@ const Join = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            href="http://localhost:3000/join/complete"
           >
             Join
           </Button>
