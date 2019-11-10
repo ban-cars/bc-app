@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
+    "es6-promise": "^4.2.8",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.11.0",
     "react-bingmaps": "^3.6.1",
     "react-dom": "^16.11.0",

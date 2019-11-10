@@ -12,8 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
-      licensePlate: "V6M 4M2"
+     
     };
   }
 
