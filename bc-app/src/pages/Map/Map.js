@@ -90,8 +90,10 @@ const Map = () => {
 
   let parkingSpots = [];
   let allSpots = getAvailableParking();
+console.log("allSpots:" + allSpots.toString())
+console.log("allSpots.parking:" + allSpots.parkings)
 
-  allSpots.parkings.forEach((spot) => {
+  allSpots.forEach((spot) => {
     parkingSpots.push({
       location: [spot.lat, spot.lon],
       addHandler: "mouseover",
