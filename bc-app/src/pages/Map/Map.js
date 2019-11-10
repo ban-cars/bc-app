@@ -17,6 +17,8 @@ import {
 
 import AddIcon from "@material-ui/icons/Add";
 
+import ReserveParking from "../../component/ReserveParking/ReserveParking";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -93,16 +95,7 @@ const Map = () => {
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <AddIcon /> : <AddIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <ReserveParking />
     </div>
   );
 
