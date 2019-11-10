@@ -75,7 +75,6 @@ let data = {
 };
 
 let currSpot;
-let hasNotUpdated = true;
 
 const Map = () => {
   const classes = useStyles();
@@ -107,7 +106,7 @@ const Map = () => {
         suggestedPrice.substring(0, 1) +
         "." +
         suggestedPrice.substring(1, suggestedPrice.length);
-      parkingSpots.push({
+      data.parkingSpots.push({
         location: [spot.lat, spot.lon],
         addHandler: "mouseover",
         infoboxOption: {
@@ -121,13 +120,14 @@ const Map = () => {
         infoboxAddHandler: {
           type: "click",
           callback: () => {
-            currSpot = [49.246292, -123.0433];
+            currSpot = [spot.lat, spot.lon];
             toggleDrawerMap();
           }
         }
       });
     });
   });
+  console.log(data.parkingSpots);
 
   const fullList = side => (
     <div
@@ -139,7 +139,6 @@ const Map = () => {
       <ReserveParking currSpot={currSpot} data={data} />
     </div>
   );
-  updateVal(hasNotUpdated);
   return (
     <div className={classes.root}>
       <CssBaseline />

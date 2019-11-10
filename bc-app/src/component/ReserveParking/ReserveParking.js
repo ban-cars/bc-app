@@ -71,7 +71,6 @@ function getStepContent(step) {
 const ReserveParking = ({ currSpot, data }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
   const handleNext = () => {
     let a;
     if (activeStep === steps.length - 1) {
@@ -79,6 +78,7 @@ const ReserveParking = ({ currSpot, data }) => {
         return spot.locaion == currSpot;
       });
       data.userSpot = difference(data.parkingSpots, a);
+      console.log(a);
       data.parkingSpots = a;
     }
     setActiveStep(activeStep + 1);
