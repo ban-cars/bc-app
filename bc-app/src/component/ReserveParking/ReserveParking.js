@@ -7,8 +7,14 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+
+import Details from "./Details";
+import EnterDetails from "./EnterDetails";
+import Billing from "./Billing";
+
+import difference from "lodash/difference";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -47,147 +53,88 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const bookingSteps = ["Shipping address", "Payment details", "Review your order"];
-const yourDetails = ["Your Contact Details"];
+const steps = ["Parking spot details", "Personal details", "Payment details"];
 
-const ReserveParking = () => {
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return <Details />;
+    case 1:
+      return <EnterDetails />;
+    case 2:
+      return <Billing />;
+    default:
+      throw new Error("Unknown step");
+  }
+}
+
+const ReserveParking = ({ currSpot, data }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
+    let a;
+    if (activeStep === steps.length - 1) {
+      a = data.parkingSpots.filter(spot => {
+        return spot.locaion == currSpot;
+      });
+      data.userSpot = difference(data.parkingSpots, a);
+      data.parkingSpots = a;
+    }
     setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
   return (
     <React.Fragment>
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Your Contact Details that We Currently Hold
+            Register for spot
+          </Typography>
+          <Typography component="h3" variant="h4" align="center">
+            November 10, 2019
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {yourDetails.map(label => (
+            {steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="firstName"
-                name="firstName"
-                label="First name"
-                fullWidth
-                autoComplete="fname"
-                value="Nicholas"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="lastName"
-                name="lastName"
-                label="Last name"
-                fullWidth
-                autoComplete="lname"
-                value="Chin"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="licensePlate"
-                name="licensePlate"
-                label="License plate"
-                fullWidth
-                autoComplete="licensePlate"
-                value="123 ABC"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="driverLicense"
-                name="driverLicense"
-                label="Driver's License"
-                fullWidth
-                autoComplete="driverLicense"
-                value="12345ASDFG"
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            Confirm Your Booking
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {bookingSteps.map(label => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="timeStart"
-                name="timeStart"
-                label="Booking From: "
-                fullWidth
-                autoComplete="timeStart"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="timeEnd"
-                name="timeEnd"
-                label="Booking Until"
-                fullWidth
-                autoComplete="timeEnd"
-              />
-            </Grid>
-          </Grid>
           <React.Fragment>
-            {activeStep === bookingSteps.length ? (
+            {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Thank you for registering.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  Your vehicle can now use spot #257.
                 </Typography>
               </React.Fragment>
             ) : (
-                <React.Fragment>
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
-                        Back
+              <React.Fragment>
+                {getStepContent(activeStep)}
+                <div className={classes.buttons}>
+                  {activeStep !== 0 && (
+                    <Button onClick={handleBack} className={classes.button}>
+                      Back
                     </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === bookingSteps.length - 1 ? "Place order" : "Next"}
-                    </Button>
-                  </div>
-                </React.Fragment>
-              )}
+                  )}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                  </Button>
+                </div>
+              </React.Fragment>
+            )}
           </React.Fragment>
         </Paper>
       </main>

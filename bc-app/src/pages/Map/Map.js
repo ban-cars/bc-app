@@ -2,13 +2,14 @@ import React from "react";
 
 import { ReactBingmaps } from "react-bingmaps";
 
-import { getAvailableParking } from '../../api/getAvailableParking';
+import { getAvailableParking } from "../../api/getAvailableParking";
 
 import { makeStyles, fade } from "@material-ui/core/styles";
 import {
   AppBar,
   CssBaseline,
   Drawer,
+  Divider,
   InputBase,
   List,
   ListItem,
@@ -20,6 +21,8 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 
 import ReserveParking from "../../component/ReserveParking/ReserveParking";
+
+import UserSpot from "../../component/UserSpot/UserSpot";
 
 const drawerWidth = 240;
 
@@ -67,7 +70,13 @@ const useStyles = makeStyles(theme => ({
     width: "auto"
   }
 }));
-let parkingSpots = [];
+let data = {
+  parkingSpots: []
+};
+
+let currSpot;
+let hasNotUpdated = true;
+
 const Map = () => {
   const classes = useStyles();
 
@@ -90,9 +99,9 @@ const Map = () => {
     setState({ ...state, bottom: true });
   };
 
-  let allSpots = getAvailableParking().then((spots) => {
-    spots.parkings.forEach((spot) => {
-      parkingSpots.push({
+  let allSpots = getAvailableParking().then(spots => {
+    spots.parkings.forEach(spot => {
+      data.parkingSpots.push({
         location: [spot.lat, spot.lon],
         addHandler: "mouseover",
         infoboxOption: {
@@ -103,7 +112,13 @@ const Map = () => {
           title: spot.address,
           description: spot.address
         },
-        infoboxAddHandler: { type: "click", callback: toggleDrawerMap }
+        infoboxAddHandler: {
+          type: "click",
+          callback: () => {
+            currSpot = [49.246292, -123.0433];
+            toggleDrawerMap();
+          }
+        }
       });
     });
   });
@@ -112,13 +127,13 @@ const Map = () => {
     <div
       className={classes.fullList}
       role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
+      onClick={toggleDrawer(side, true)}
+      onKeyDown={toggleDrawer(side, true)}
     >
-      <ReserveParking />
+      <ReserveParking currSpot={currSpot} data={data} />
     </div>
   );
-
+  updateVal(hasNotUpdated);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -147,13 +162,24 @@ const Map = () => {
         <div className={classes.toolbar} />
         <List>
           {["Add parking space"].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem
+              button
+              key={text}
+              component="a"
+              href="http://localhost:3000/join"
+            >
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
+          <Divider />
+          {data.userSpot && (
+            <ListItem>
+              <UserSpot userSpot={data.userSpot} />
+            </ListItem>
+          )}
         </List>
       </Drawer>
       <main className={classes.content}>
@@ -167,7 +193,7 @@ const Map = () => {
             mapTypeId={"road"}
             navigationBarMode={"compact"}
             zoom={13}
-            infoboxesWithPushPins={parkingSpots}
+            infoboxesWithPushPins={data.parkingSpots}
           />
         </>
       </main>
