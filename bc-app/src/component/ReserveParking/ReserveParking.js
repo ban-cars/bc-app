@@ -7,6 +7,8 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -65,7 +67,7 @@ const ReserveParking = () => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            Confirm Your Details
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (
@@ -74,6 +76,52 @@ const ReserveParking = () => {
               </Step>
             ))}
           </Stepper>
+          <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="firstName"
+            name="firstName"
+            label="First name"
+            fullWidth
+            autoComplete="fname"
+            value="Nicholas"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="lastName"
+            name="lastName"
+            label="Last name"
+            fullWidth
+            autoComplete="lname"
+            value="Chin"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="licensePlate"
+            name="licensePlate"
+            label="License plate"
+            fullWidth
+            autoComplete="licensePlate"
+            value="123 ABC"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="driverLicense"
+            name="driverLicense"
+            label="Driver's License"
+            fullWidth
+            autoComplete="driverLicense"
+            value="12345ASDFG"
+          />
+        </Grid>
+      </Grid>
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
@@ -88,7 +136,6 @@ const ReserveParking = () => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {<p1>a</p1>}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
@@ -133,7 +180,6 @@ const ReserveParking = () => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {<p1>a</p1>}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>

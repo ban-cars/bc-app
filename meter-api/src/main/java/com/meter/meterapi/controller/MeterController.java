@@ -32,9 +32,9 @@ public class MeterController {
 	public ResponseEntity<MapResponseSchema> getDetails() {
 		// Inject fake data
 		mapRepository.deleteAll();
-		mapRepository.save(new Parking(49.2606, -123.2460, "http://qualityone.ca/docs/content_images/pressure/west-vancouver-driveway-power-washed-after.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false));
-		mapRepository.save(new Parking(18.2606, -122.2460, "https://www.joyvictor.com/i/2016/01/Beautiful-driveway-landscaping-with-paver-flooring-also-beutiful-front-yard-garden-plus-white-garage-door.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false));
-		mapRepository.save(new Parking(28.2606, -121.2460, "https://mrengineering.ca/wp-content/uploads/2019/05/Concrete-Garage-Pad.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false));
+		mapRepository.save(new Parking(49.2606, -123.2460, "http://qualityone.ca/docs/content_images/pressure/west-vancouver-driveway-power-washed-after.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false, 4));
+		mapRepository.save(new Parking(18.2606, -122.2460, "https://www.joyvictor.com/i/2016/01/Beautiful-driveway-landscaping-with-paver-flooring-also-beutiful-front-yard-garden-plus-white-garage-door.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false, 5));
+		mapRepository.save(new Parking(28.2606, -121.2460, "https://mrengineering.ca/wp-content/uploads/2019/05/Concrete-Garage-Pad.jpg", "address", System.nanoTime(), System.nanoTime(), System.nanoTime(), false,3));
 
 		List<Parking> temp = new ArrayList<Parking>();
 		for(Parking parking: mapRepository.findAll()) {
