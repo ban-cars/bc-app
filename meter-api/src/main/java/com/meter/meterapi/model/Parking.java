@@ -66,7 +66,7 @@ public class Parking {
 	*
 	*/
 	@JsonProperty("timeStart")
-	public Long timeStart;
+	public String timeStart;
 	/**
 	* The Timeend Schema
 	* <p>
@@ -75,7 +75,7 @@ public class Parking {
 	*
 	*/
 	@JsonProperty("timeEnd")
-	public Long timeEnd;
+	public String timeEnd;
 	/**
 	* The Todaydate Schema
 	* <p>
@@ -101,7 +101,7 @@ public class Parking {
 	@JsonProperty("suggestedPrice")
 	public Integer suggestedPrice;
 	
-	public Parking(double lat, double lon, String url, String address, Long timeStart, Long timeEnd, Long todayDate,
+	public Parking(double lat, double lon, String url, String address, String timeStart, String timeEnd, Long todayDate,
 			boolean isReserved, int suggestedPrice) {
 		super();
 		this.lat = lat;

@@ -101,12 +101,17 @@ const Map = () => {
 
   let allSpots = getAvailableParking().then(spots => {
     spots.parkings.forEach(spot => {
-      data.parkingSpots.push({
+      let suggestedPrice = spot.suggestedPrice.toString();
+      let finalPrice =
+        suggestedPrice.substring(0, 1) +
+        "." +
+        suggestedPrice.substring(1, suggestedPrice.length);
+      parkingSpots.push({
         location: [spot.lat, spot.lon],
         addHandler: "mouseover",
         infoboxOption: {
           title: spot.address,
-          description: `Address: ${spot.address} \n Suggested Price: ${spot.suggestedPrice} \n Availability: ${spot.timeStart} - ${spot.timeEnd}`
+          description: `Address: ${spot.address} \n Suggested Price: ${finalPrice}/hour \n Availability: From ${spot.timeStart} to ${spot.timeEnd}`
         },
         pushPinOption: {
           title: spot.address,
